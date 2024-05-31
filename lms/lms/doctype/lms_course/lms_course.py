@@ -209,7 +209,9 @@ def submit_for_review(course):
 @frappe.whitelist()
 def save_course(
 	tags,
+	skills,
 	title,
+	subject,
 	short_introduction,
 	video_link,
 	description,
@@ -232,11 +234,13 @@ def save_course(
 	doc.update(
 		{
 			"title": title,
+			"subject": subject,
 			"short_introduction": short_introduction,
 			"video_link": video_link,
 			"image": image,
 			"description": description,
 			"tags": tags,
+			"skills" : skills,
 			"published": cint(published),
 			"upcoming": cint(upcoming),
 			"paid_course": cint(paid_course),

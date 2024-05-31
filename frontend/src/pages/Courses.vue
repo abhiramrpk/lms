@@ -20,7 +20,7 @@
 						<template #prefix>
 							<Plus class="h-4 w-4" />
 						</template>
-						{{ __('New Course') }}
+						{{ __('Add Course') }}
 					</Button>
 				</router-link>
 			</div>

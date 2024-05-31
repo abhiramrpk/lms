@@ -15,11 +15,13 @@
  "engine": "InnoDB",
  "field_order": [
   "title",
+  "subject",
   "video_link",
   "image",
   "column_break_3",
   "instructors",
   "tags",
+  "skills",
   "status",
   "section_break_7",
   "published",
@@ -31,6 +33,7 @@
   "section_break_18",
   "short_introduction",
   "description",
+  "course_outcome",
   "chapters",
   "related_courses",
   "pricing_section",
@@ -76,8 +79,7 @@
   {
    "fieldname": "video_link",
    "fieldtype": "Data",
-   "label": "Video Embed Link",
-   "reqd": 1
+   "label": "Video Embed Link"
   },
   {
    "fieldname": "short_introduction",
@@ -248,6 +250,22 @@
    "fieldname": "published_on",
    "fieldtype": "Date",
    "label": "Published On"
+  },
+  {
+   "fieldname": "course_outcome",
+   "fieldtype": "Data",
+   "label": "Course Outcome"
+  },
+  {
+   "fieldname": "skills",
+   "fieldtype": "Data",
+   "label": "Skills"
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "Subject",
+   "reqd": 1
   }
  ],
  "is_published_field": "published",
@@ -274,7 +292,7 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2024-04-16 17:40:50.899368",
+ "modified": "2024-05-15 12:32:57.960167",
  "modified_by": "Administrator",
  "module": "LMS",
  "name": "LMS Course",

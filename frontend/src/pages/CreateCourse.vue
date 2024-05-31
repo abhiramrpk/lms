@@ -38,6 +38,11 @@
 							class="mb-4"
 						/>
 						<FormControl
+							v-model="course.subject"
+							:label="__('Subject')"
+							class="mb-4"
+						/>
+						<FormControl
 							v-model="course.short_introduction"
 							:label="__('Short Introduction')"
 							class="mb-4"
@@ -49,6 +54,18 @@
 							<TextEditor
 								:content="course.description"
 								@change="(val) => (course.description = val)"
+								:editable="true"
+								:fixedMenu="true"
+								editorClass="prose-sm max-w-none border-b border-x bg-gray-100 rounded-b-md py-1 px-2 min-h-[7rem]"
+							/>
+						</div>
+									<div class="mb-4">
+							<div class="mb-1.5 text-sm text-gray-700">
+								{{ __('Course Outcome') }}
+							</div>
+							<TextEditor
+								:content="course.course_outcome"
+								@change="(val) => (course.course_outcome = val)"
 								:editable="true"
 								:fixedMenu="true"
 								editorClass="prose-sm max-w-none border-b border-x bg-gray-100 rounded-b-md py-1 px-2 min-h-[7rem]"
@@ -117,6 +134,29 @@
 								<FormControl v-model="newTag" @keyup.enter="updateTags()" />
 							</div>
 						</div>
+
+						<div>
+							<div class="mb-1.5 text-xs text-gray-600">
+								{{ __('Skills') }}
+							</div>
+							<div class="flex items-center">
+								<div
+									v-for="skill in course.skills?.split(', ')"
+									class="flex items-center bg-gray-100 p-2 rounded-md mr-2"
+								>
+									{{ skill }}
+									<X
+										class="stroke-1.5 w-3 h-3 ml-2 cursor-pointer"
+										@click="removeSkill(skill)"
+									/>
+								</div>
+								<FormControl v-model="newSkill" @keyup.enter="updateSkills()" />
+							</div>
+						</div>
+
+
+
+
 					</div>
 					<div class="container border-t">
 						<div class="text-lg font-semibold mt-5 mb-4">
@@ -202,6 +242,7 @@ import CourseOutline from '@/components/CourseOutline.vue'
 
 const user = inject('$user')
 const newTag = ref('')
+const newSkill = ref('')
 const router = useRouter()
 
 const props = defineProps({
@@ -212,11 +253,13 @@ const props = defineProps({
 
 const course = reactive({
 	title: '',
+	subject: '',
 	short_introduction: '',
 	description: '',
 	video_link: '',
 	course_image: null,
 	tags: '',
+	skills : '',
 	published: false,
 	published_on: '',
 	upcoming: false,
@@ -338,6 +381,7 @@ const submitCourse = () => {
 const validateMandatoryFields = () => {
 	const mandatory_fields = [
 		'title',
+		'subject',
 		'short_introduction',
 		'description',
 		'video_link',
@@ -383,6 +427,21 @@ const removeTag = (tag) => {
 		.filter((t) => t !== tag)
 		.join(', ')
 	newTag.value = ''
+}
+
+const updateSkills = () => {
+	if (newSkill.value) {
+		course.skills = course.skills ? `${course.skills}, ${newSkill.value}` : newSkill.value
+		newSkill.value = ''
+	}
+}
+
+const removeSkill = (skill) => {
+	course.skills = course.skills
+		?.split(', ')
+		.filter((t) => t !== skill)
+		.join(', ')
+	newSkill.value = ''
 }
 
 const saveImage = (file) => {

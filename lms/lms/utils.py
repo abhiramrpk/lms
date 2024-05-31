@@ -1202,6 +1202,8 @@ def get_course_details(course):
 			"name",
 			"title",
 			"tags",
+			"subject",
+			"skills",
 			"description",
 			"image",
 			"video_link",
@@ -1214,6 +1216,7 @@ def get_course_details(course):
 			"course_price",
 			"currency",
 			"amount_usd",
+			"course_outcome"
 		],
 		as_dict=1,
 	)
